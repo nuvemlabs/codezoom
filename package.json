@@ -1,0 +1,105 @@
+{
+  "name": "codezoom",
+  "displayName": "CodeZoom",
+  "description": "Progressive code summarization for architectural understanding",
+  "version": "0.1.0",
+  "publisher": "nuvemlabs",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "code",
+    "summarization",
+    "ai",
+    "architecture",
+    "zoom"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codezoom.zoomIn",
+        "title": "Zoom In",
+        "category": "CodeZoom"
+      },
+      {
+        "command": "codezoom.zoomOut",
+        "title": "Zoom Out",
+        "category": "CodeZoom"
+      },
+      {
+        "command": "codezoom.reset",
+        "title": "Reset Zoom",
+        "category": "CodeZoom"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "codezoom.zoomIn",
+        "key": "ctrl+shift+equal",
+        "mac": "cmd+shift+equal",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "codezoom.zoomOut",
+        "key": "ctrl+shift+minus",
+        "mac": "cmd+shift+minus",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "codezoom.reset",
+        "key": "ctrl+shift+0",
+        "mac": "cmd+shift+0",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:javascript",
+    "onLanguage:python",
+    "onLanguage:java"
+  ],
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test",
+    "test:unit": "mocha out/test/unit/**/*.js",
+    "test:e2e": "vscode-test"
+  },
+  "author": "nuvemlabs",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^5.2.2",
+    "@types/mocha": "^10.0.10",
+    "@types/sinon": "^17.0.4",
+    "@types/vscode": "^1.102.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "@vscode/test-electron": "^2.5.2",
+    "chai": "^5.2.1",
+    "eslint": "^9.32.0",
+    "mocha": "^11.7.1",
+    "sinon": "^21.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.101.0",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.1"
+  }
+}
