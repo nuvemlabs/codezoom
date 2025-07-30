@@ -1,23 +1,37 @@
 import * as vscode from 'vscode';
+import { ZoomCommandManager } from './commands/zoomCommands';
+import { StatusBarManager } from './ui/statusBar';
+
+let commandManager: ZoomCommandManager;
+let statusBarManager: StatusBarManager;
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('CodeZoom extension is now active');
 
-    const zoomInCommand = vscode.commands.registerCommand('codezoom.zoomIn', () => {
-        vscode.window.showInformationMessage('CodeZoom: Zoom In (not implemented yet)');
-    });
+    try {
+        // Initialize command manager
+        commandManager = new ZoomCommandManager();
+        commandManager.registerCommands(context);
 
-    const zoomOutCommand = vscode.commands.registerCommand('codezoom.zoomOut', () => {
-        vscode.window.showInformationMessage('CodeZoom: Zoom Out (not implemented yet)');
-    });
+        // Initialize status bar manager
+        statusBarManager = new StatusBarManager();
+        statusBarManager.initialize(context);
 
-    const resetCommand = vscode.commands.registerCommand('codezoom.reset', () => {
-        vscode.window.showInformationMessage('CodeZoom: Reset Zoom (not implemented yet)');
-    });
-
-    context.subscriptions.push(zoomInCommand, zoomOutCommand, resetCommand);
+        console.log('CodeZoom extension activated successfully');
+    } catch (error) {
+        console.error('CodeZoom extension activation failed:', error);
+        vscode.window.showErrorMessage(`CodeZoom failed to activate: ${error}`);
+    }
 }
 
 export function deactivate() {
-    console.log('CodeZoom extension is deactivated');
+    console.log('CodeZoom extension is deactivating');
+    
+    try {
+        commandManager?.dispose();
+        statusBarManager?.dispose();
+        console.log('CodeZoom extension deactivated successfully');
+    } catch (error) {
+        console.error('CodeZoom extension deactivation error:', error);
+    }
 }
