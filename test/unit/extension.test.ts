@@ -24,7 +24,7 @@ suite('Extension Test Suite', () => {
 
             activate(context);
 
-            assert(registerCommandStub.calledWith('codezoom.zoomIn'));
+            assert.ok(registerCommandStub.calledWith('codezoom.zoomIn'));
             assert.strictEqual(context.subscriptions.length, 3);
         });
 
@@ -38,7 +38,7 @@ suite('Extension Test Suite', () => {
 
             activate(context);
 
-            assert(registerCommandStub.calledWith('codezoom.zoomOut'));
+            assert.ok(registerCommandStub.calledWith('codezoom.zoomOut'));
         });
 
         test('should register reset command', async () => {
@@ -51,7 +51,7 @@ suite('Extension Test Suite', () => {
 
             activate(context);
 
-            assert(registerCommandStub.calledWith('codezoom.reset'));
+            assert.ok(registerCommandStub.calledWith('codezoom.reset'));
         });
     });
 
@@ -70,7 +70,7 @@ suite('Extension Test Suite', () => {
             const zoomInHandler = registerCommandStub.getCall(0).args[1];
             zoomInHandler();
 
-            assert(showInfoStub.calledWith('CodeZoom: Zoom In (not implemented yet)'));
+            assert.ok(showInfoStub.calledWith('CodeZoom: Zoom In (not implemented yet)'));
         });
 
         test('zoom out command should show placeholder message', async () => {
@@ -87,7 +87,7 @@ suite('Extension Test Suite', () => {
             const zoomOutHandler = registerCommandStub.getCall(1).args[1];
             zoomOutHandler();
 
-            assert(showInfoStub.calledWith('CodeZoom: Zoom Out (not implemented yet)'));
+            assert.ok(showInfoStub.calledWith('CodeZoom: Zoom Out (not implemented yet)'));
         });
 
         test('reset command should show placeholder message', async () => {
@@ -104,7 +104,7 @@ suite('Extension Test Suite', () => {
             const resetHandler = registerCommandStub.getCall(2).args[1];
             resetHandler();
 
-            assert(showInfoStub.calledWith('CodeZoom: Reset Zoom (not implemented yet)'));
+            assert.ok(showInfoStub.calledWith('CodeZoom: Reset Zoom (not implemented yet)'));
         });
     });
 });
